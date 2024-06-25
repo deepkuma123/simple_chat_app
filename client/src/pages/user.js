@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import styles from "./user.module.css";
-import { setLogin } from "../state";
+import { setLogin, setLogout } from "../state";
 const UserList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -69,8 +69,11 @@ const UserList = () => {
       return () => newSocket.close();
     }
   }, [user, navigate]);
-
-  
+  // Logout button
+  const logout = () => {
+    dispatch(setLogout());
+    navigate("/login");
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -121,7 +124,7 @@ const UserList = () => {
 
       <h1 style={{ textAlign: "center" }}>{user.name}</h1>
       <h3 style={{ textAlign: "center", marginTop: "-25px" }}>({user.role})</h3>
-
+      <button onClick={() => logout()}>logout</button>
       <h2 style={{ textAlign: "center" }}>User List</h2>
       <table
         style={{ textAlign: "center", wordWrap: "normal" }}

@@ -14,9 +14,8 @@ export const authSlice = createSlice({
       // state.token = action.payload.token;
     },
     setLogout: (state) => {
-      state.user = null;
-      localStorage.removeItem("");
-      // state.token = null;
+      // state.user = null;
+      localStorage.removeItem("token"); // state.token = null;
     },
   },
 });
